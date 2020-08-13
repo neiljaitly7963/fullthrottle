@@ -6,19 +6,32 @@ export const users = [
     "email": "Sincere@april.biz",
     "activity_periods": [
                 {
+                  "date": "Aug 13 2020",
+                  "time": [
+                      {
+                          "startime":"1:53PM",
+                          "endtimne":'2:12PM'
+                      },
+                      {
+                          "startime":"6:02PM",
+                          "endtimne":'9:04PM'
+                      },
+                      {
+                          "startime":"9:21PM",
+                          "endtimne":'10:34PM'
+                      }
+                  ]
+                },
+                {
                   "date": "Aug 12 2020",
                   "time": [
                       {
-                          "startime":"1:33PM",
-                          "endtimne":'2:45PM'
+                          "startime":"1:53PM",
+                          "endtimne":'2:12PM'
                       },
                       {
-                          "startime":"6:00PM",
-                          "endtimne":'9:07PM'
-                      },
-                      {
-                          "startime":"9:23PM",
-                          "endtimne":'10:44PM'
+                          "startime":"6:02PM",
+                          "endtimne":'9:04PM'
                       }
                   ]
                 },
@@ -26,16 +39,20 @@ export const users = [
                   "date": "Aug 11 2020",
                   "time": [
                       {
-                          "startime":"10:33AM",
-                          "endtimne":'2:15PM'
+                          "startime":"1:53PM",
+                          "endtimne":'2:12PM'
                       },
                       {
-                          "startime":"3:00PM",
-                          "endtimne":'5:07PM'
+                          "startime":"6:02PM",
+                          "endtimne":'9:04PM'
                       },
                       {
-                          "startime":"6:23PM",
-                          "endtimne":'8:44PM'
+                          "startime":"9:21PM",
+                          "endtimne":'10:34PM'
+                      },
+                      {
+                          "startime":"9:21PM",
+                          "endtimne":'10:34PM'
                       }
                   ]
                 }

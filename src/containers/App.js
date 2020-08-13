@@ -18,18 +18,10 @@ class App extends Component {
 			userId: 0,
 			date: new Date(),
 			currentuser: {},
-			timedatas: [{
-                          "startime":"",
-                          "endtimne":''
-                      }]
+			timedatas: []
 		}
 	}
 
-	// componentDidMount(){
-	// 	fetch('https://jsonplaceholder.typicode.com/users')
-	// 	.then(response => response.json())
-	// 	.then(users => this.setState({robots:users}));
-	// }
 
 	onSearchChange = (event) => {
 		this.setState({searchfield: event.target.value})
@@ -39,31 +31,64 @@ class App extends Component {
     	this.setState({modalShow: value})
   	}
 
+  	// setUserId = (id) => {
+  	// 	this.setState({userId: id}, this.setCurrentUser)
+  	// }
+
+  	// setCurrentUser = () => {
+  	// 	for (var i = 0; i < this.state.robots.length; i++) {
+  	// 		if (this.state.robots[i].id === this.state.userId) {
+  	// 			this.setState({currentuser: this.state.robots[i]}, this.setTimeDatas)
+  	// 		}
+  	// 	}
+  	// }
+
+
   	setUserId = (id) => {
-  		for (var i = 0; i < this.state.robots.length; i++) {
-  			if (this.state.robots[i].id === id) {
-  				this.setState({currentuser: this.state.robots[i]}, () => {
-  					  		for (var j = 0; j < this.state.currentuser.activity_periods.length; j++) {
-  								if (this.state.currentuser.activity_periods[j].date === String(this.state.date).substr(4,11)) {
-  									this.setState({timedatas: this.state.currentuser.activity_periods[j].time}, () => console.log(this.state.timedatas[0]))
-  								}
-  							}
-  				})
-  			}
-  		}
+	  	for (var i = 0; i < this.state.robots.length; i++) {
+	  			if (this.state.robots[i].id === id) {
+	  				var currentuser = this.state.robots[i]
+	  				for (var j = 0; j < currentuser.activity_periods.length; j++) {
+	  					if (currentuser.activity_periods[j].date === String(this.state.date).substr(4,11)) {
+	  						var timedatas = currentuser.activity_periods[j].time}
+	  						this.setState({timedatas: timedatas, currentuser: currentuser, userId: id})
+	  					}
+	  				}
+	  			}
+
+	  			console.log(currentuser, timedatas, id, "both logged")
+	  	}
 
 
 
 
 
-  		this.setState({userId: id})
-  	}
+  	// setTimeDatas = () => {
+  	// 	for (var j = 0; j < this.state.currentuser.activity_periods.length; j++) {
+  	// 		if (this.state.currentuser.activity_periods[j].date === String(this.state.date).substr(4,11)) {
+  	// 			this.setState({timedatas: this.state.currentuser.activity_periods[j].time}, console.log("random"))
+  	// 		}
+  	// 	}
+  	// }
 
+	onChange = date => this.setState({ date })
 
-  	onChange = (date) => {
-  		this.setState({ date })
-  		console.log(this.state.date)
-  	}
+	onClickDay = (date) => {
+		for (var k = 0; k < this.state.currentuser.activity_periods.length; k++) {
+	  					if (this.state.currentuser.activity_periods[k].date === String(date).substr(4,11)) {
+	  						var timedatas = this.state.currentuser.activity_periods[k].time
+	  						console.log("timedat change is working", timedatas)
+	  					}
+
+	  					this.setState({timedatas: timedatas})
+
+	  					
+	  	}
+	}
+
+	
+
+  	newDate = () => console.log(this.state.date)
 
 	render() {
 			const {robots, searchfield} = this.state;
@@ -89,6 +114,7 @@ class App extends Component {
           						currentuser={this.state.currentuser}
           						timedatas={this.state.timedatas}
           						onChange={this.onChange}
+          						onClickDay={this.onClickDay}
         					/>
 				  		</ErrorBoundry>
 				  	</Scroll>
