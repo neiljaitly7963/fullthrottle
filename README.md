@@ -1,5 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+You can check the live demo using https://neiljaitly7963.github.io/fullthrottle/ link.
+
+https://jsonplaceholder.typicode.com/ was used for user information.
+
+Start and End Time data only available for 13th, 14th, 15th Aug 2020.
+
+Tachyons and react-bootstrap was used for styling
+
+To run the project locally:-
+	1) Clone the repo
+	2) run "npm install"
+	3) run "npm start"
+
 ## Available Scripts
 
 In the project directory, you can run:
