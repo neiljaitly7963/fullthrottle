@@ -1,11 +1,11 @@
 import React from 'react';
 import Card from './Card';
-const CardList = ({robots, setModalShow, setUserId, setCurrentuser}) => {
+const CardList = ({users, setModalShow, setUserId, setCurrentuser}) => {
 	
 	return(
 		<div>
 			{
-				robots.map(user => {
+				users.map(user => {
 				return  (
 					<Card 
 						key={user.id} 

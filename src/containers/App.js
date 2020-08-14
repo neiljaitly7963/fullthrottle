@@ -12,7 +12,7 @@ class App extends Component {
 	constructor() {
 		super()
 		this.state = {
-			robots: users,
+			users: users,
 			searchfield: '',
 			modalShow: false,
 			userId: 0,
@@ -27,100 +27,71 @@ class App extends Component {
 		this.setState({searchfield: event.target.value})
 	}
 
+
 	setModalShow = (value) => {
     	this.setState({modalShow: value})
   	}
 
-  	// setUserId = (id) => {
-  	// 	this.setState({userId: id}, this.setCurrentUser)
-  	// }
-
-  	// setCurrentUser = () => {
-  	// 	for (var i = 0; i < this.state.robots.length; i++) {
-  	// 		if (this.state.robots[i].id === this.state.userId) {
-  	// 			this.setState({currentuser: this.state.robots[i]}, this.setTimeDatas)
-  	// 		}
-  	// 	}
-  	// }
-
 
   	setUserId = (id) => {
-	  	for (var i = 0; i < this.state.robots.length; i++) {
-	  			if (this.state.robots[i].id === id) {
-	  				var currentuser = this.state.robots[i]
+	  	for (var i = 0; i < this.state.users.length; i++) {
+	  		if (this.state.users[i].id === id) {
+	  			var currentuser = this.state.users[i]
 	  				for (var j = 0; j < currentuser.activity_periods.length; j++) {
 	  					if (currentuser.activity_periods[j].date === String(this.state.date).substr(4,11)) {
-	  						var timedatas = currentuser.activity_periods[j].time}
-	  						this.setState({timedatas: timedatas, currentuser: currentuser, userId: id})
+	  						var timedatas = currentuser.activity_periods[j].time
 	  					}
+	  					this.setState({timedatas: timedatas, currentuser: currentuser, userId: id})
 	  				}
-	  			}
-
-	  			console.log(currentuser, timedatas, id, "both logged")
+	  		}
 	  	}
+	 }
 
 
+	// onChange = date => this.setState({ date })
 
-
-
-  	// setTimeDatas = () => {
-  	// 	for (var j = 0; j < this.state.currentuser.activity_periods.length; j++) {
-  	// 		if (this.state.currentuser.activity_periods[j].date === String(this.state.date).substr(4,11)) {
-  	// 			this.setState({timedatas: this.state.currentuser.activity_periods[j].time}, console.log("random"))
-  	// 		}
-  	// 	}
-  	// }
-
-	onChange = date => this.setState({ date })
 
 	onClickDay = (date) => {
 		for (var k = 0; k < this.state.currentuser.activity_periods.length; k++) {
-	  					if (this.state.currentuser.activity_periods[k].date === String(date).substr(4,11)) {
-	  						var timedatas = this.state.currentuser.activity_periods[k].time
-	  						console.log("timedat change is working", timedatas)
-	  					}
-
-	  					this.setState({timedatas: timedatas})
-
-	  					
+	  		if (this.state.currentuser.activity_periods[k].date === String(date).substr(4,11)) {
+	  			var timedatas = this.state.currentuser.activity_periods[k].time
+	  		}
+	  	this.setState({timedatas: timedatas, date: date})			
 	  	}
 	}
 
 	
-
   	newDate = () => console.log(this.state.date)
 
+
 	render() {
-			const {robots, searchfield} = this.state;
-			const filteredRobots = robots.filter(robot => {
-				return robot.name.toLowerCase().includes(searchfield.toLowerCase())
+			const {users, searchfield} = this.state;
+			const filteredUsers = users.filter(user => {
+				return user.name.toLowerCase().includes(searchfield.toLowerCase())
 			})
-			return !robots.length ?
+			return !users.length ?
 			<h1>Loading</h1> :
 			(
 			  	<div className='tc'>
-					<h1 className="f2">RoboFriends</h1>
+					<h2 className="f2">Users Data</h2>
 					<SearchBox searchChange={this.onSearchChange} />
 
 					<Scroll>
 						<ErrorBoundry>
-				  			<CardList robots={filteredRobots} setModalShow={this.setModalShow} setUserId={this.setUserId} />
+				  			<CardList users={filteredUsers} setModalShow={this.setModalShow} setUserId={this.setUserId} />
 				  			<UserModal
           						show={this.state.modalShow}
           						onHide={() => this.setModalShow(false)}
-          						userId={this.state.userId}
-          						users={this.state.robots}
           						date={this.state.date}
-          						currentuser={this.state.currentuser}
           						timedatas={this.state.timedatas}
           						onChange={this.onChange}
           						onClickDay={this.onClickDay}
+          						currentuser={this.state.currentuser}
         					/>
 				  		</ErrorBoundry>
 				  	</Scroll>
 			  	</div>
 		)
-			
 		}
 }
 
